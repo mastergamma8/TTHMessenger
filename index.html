@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTH Messenger</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Экран регистрации и входа -->
+    <div id="welcome-screen">
+        <h2>Регистрация</h2>
+        <input type="text" id="register-username" placeholder="Имя пользователя">
+        <input type="password" id="register-password" placeholder="Пароль">
+        <button id="register-button">Зарегистрироваться</button>
+
+        <h2>Вход</h2>
+        <input type="text" id="login-username" placeholder="Имя пользователя">
+        <input type="password" id="login-password" placeholder="Пароль">
+        <button id="login-button">Войти</button>
+
+        <p id="message"></p>
+    </div>
+
+    <!-- Главная лента -->
+    <div id="feed-screen" class="hidden">
+        <div id="feed-header">
+            <img id="profile-icon" class="icon" alt="Avatar" src="images/default-avatar.png">
+            <h2>Лента</h2>
+        </div>
+        <textarea id="post-text" placeholder="Что у вас нового?"></textarea>
+        <input type="file" id="post-image-upload">
+        <button id="publish-button">Опубликовать</button>
+        <div id="feed-container"></div>
+    </div>
+
+    <!-- Экран профиля -->
+    <div id="profile-screen" class="hidden">
+        <img id="profile-avatar" alt="Avatar" src="images/default-avatar.png">
+        <h2 id="profile-username"></h2>
+        <p id="profile-description"></p>
+        <p id="profile-nickname"></p>
+        <button id="edit-profile-button">Редактировать профиль</button>
+        <button id="settings-button">Настройки</button>
+    </div>
+
+    <!-- Экран настроек -->
+    <div id="settings-screen" class="hidden">
+        <h2>Настройки</h2>
+        <button id="nickname-button">Создать никнейм</button>
+        <button id="edit-profile-settings">Редактировать профиль</button>
+        <button id="theme-button">Изменить тему</button>
+        <button id="back-to-profile-button">Назад в профиль</button>
+    </div>
+
+    <!-- Экран редактирования профиля -->
+    <div id="edit-screen" class="hidden">
+        <h2>Редактировать профиль</h2>
+        <input type="text" id="edit-username" placeholder="Имя пользователя">
+        <input type="password" id="edit-password" placeholder="Пароль">
+        <textarea id="edit-description" placeholder="Описание профиля"></textarea>
+        <input type="file" id="avatar-upload">
+        <button id="save-button">Сохранить</button>
+        <button id="cancel-button">Отмена</button>
+        <p id="edit-message"></p>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/posts.js"></script>
+</body>
+</html>
