@@ -3,69 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TTH Messenger</title>
     <link rel="stylesheet" href="css/style.css">
+    <title>TTH Messenger</title>
 </head>
 <body>
-    <!-- Экран регистрации и входа -->
-    <div id="welcome-screen">
-        <h2>Регистрация</h2>
-        <input type="text" id="register-username" placeholder="Имя пользователя">
-        <input type="password" id="register-password" placeholder="Пароль">
-        <button id="register-button">Зарегистрироваться</button>
-
-        <h2>Вход</h2>
-        <input type="text" id="login-username" placeholder="Имя пользователя">
-        <input type="password" id="login-password" placeholder="Пароль">
+    <div id="auth-screen">
+        <h2>Авторизация</h2>
+        <input type="text" id="username" placeholder="Имя пользователя" />
+        <input type="password" id="password" placeholder="Пароль" />
         <button id="login-button">Войти</button>
-
+        <button id="register-button">Регистрация</button>
         <p id="message"></p>
     </div>
 
-    <!-- Главная лента -->
-    <div id="feed-screen" class="hidden">
-        <div id="feed-header">
-            <img id="profile-icon" class="icon" alt="Avatar" src="images/default-avatar.png">
-            <h2>Лента</h2>
+    <div id="main-screen" style="display: none;">
+        <h2>Добро пожаловать, <span id="current-username"></span>!</h2>
+        <button id="logout-button">Выйти</button>
+        <div id="profile">
+            <h3>Профиль</h3>
+            <input type="text" id="profile-nickname" placeholder="Никнейм" />
+            <textarea id="profile-description" placeholder="Описание"></textarea>
+            <button id="save-profile">Сохранить профиль</button>
         </div>
-        <textarea id="post-text" placeholder="Что у вас нового?"></textarea>
-        <input type="file" id="post-image-upload">
-        <button id="publish-button">Опубликовать</button>
-        <div id="feed-container"></div>
+
+        <div id="posts">
+            <h3>Посты</h3>
+            <textarea id="post-text" placeholder="Напишите что-нибудь..."></textarea>
+            <input type="file" id="post-image-upload" />
+            <button id="publish-button">Опубликовать</button>
+            <div id="post-list"></div>
+        </div>
     </div>
 
-    <!-- Экран профиля -->
-    <div id="profile-screen" class="hidden">
-        <img id="profile-avatar" alt="Avatar" src="images/default-avatar.png">
-        <h2 id="profile-username"></h2>
-        <p id="profile-description"></p>
-        <p id="profile-nickname"></p>
-        <button id="edit-profile-button">Редактировать профиль</button>
-        <button id="settings-button">Настройки</button>
-    </div>
-
-    <!-- Экран настроек -->
-    <div id="settings-screen" class="hidden">
-        <h2>Настройки</h2>
-        <button id="nickname-button">Создать никнейм</button>
-        <button id="edit-profile-settings">Редактировать профиль</button>
-        <button id="theme-button">Изменить тему</button>
-        <button id="back-to-profile-button">Назад в профиль</button>
-    </div>
-
-    <!-- Экран редактирования профиля -->
-    <div id="edit-screen" class="hidden">
-        <h2>Редактировать профиль</h2>
-        <input type="text" id="edit-username" placeholder="Имя пользователя">
-        <input type="password" id="edit-password" placeholder="Пароль">
-        <textarea id="edit-description" placeholder="Описание профиля"></textarea>
-        <input type="file" id="avatar-upload">
-        <button id="save-button">Сохранить</button>
-        <button id="cancel-button">Отмена</button>
-        <p id="edit-message"></p>
-    </div>
-
-    <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/profile.js"></script>
     <script src="js/posts.js"></script>
