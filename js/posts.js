@@ -1,51 +1,42 @@
-let posts = JSON.parse(localStorage.getItem('posts')) || [];
+const apiUrl = 'http://localhost:3000/api';
 
-document.getElementById('publish-button').addEventListener('click', function () {
+async function publishPost(username, text) {
+    await fetch(`${apiUrl}/posts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, text, timestamp: new Date().toISOString() })
+    });
+}
+
+async function loadPosts() {
+    const response = await fetch(`${apiUrl}/posts`);
+    const result = await response.json();
+    return result.posts;
+}
+
+document.getElementById('publish-button').addEventListener('click', async function () {
     const postText = document.getElementById('post-text').value.trim();
-    const postImageUpload = document.getElementById('post-image-upload').files[0];
+    const username = document.getElementById('current-username').innerText;
 
-    if (postText || postImageUpload) {
-        const post = {
-            username: document.getElementById('current-username').innerText,
-            text: postText,
-            image: '',
-            timestamp: new Date().toLocaleString()
-        };
-
-        if (postImageUpload) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                post.image = e.target.result;
-                posts.push(post);
-                localStorage.setItem('posts', JSON.stringify(posts));
-                loadPosts();
-            };
-            reader.readAsDataURL(postImageUpload);
-        } else {
-            posts.push(post);
-            localStorage.setItem('posts', JSON.stringify(posts));
-            loadPosts();
-        }
-
+    if (postText) {
+        await publishPost(username, postText);
+        loadPostList();
         document.getElementById('post-text').value = '';
-        document.getElementById('post-image-upload').value = '';
     } else {
-        alert('Введите текст или загрузите изображение.');
+        alert('Введите текст.');
     }
 });
 
-function loadPosts() {
+async function loadPostList() {
+    const posts = await loadPosts();
     const postList = document.getElementById('post-list');
     postList.innerHTML = '';
     posts.forEach(post => {
         const postElement = document.createElement('div');
         postElement.classList.add('post');
-        postElement.innerHTML = `<strong>${post.username}</strong> <em>${post.timestamp}</em><br/>${post.text}`;
-        if (post.image) {
-            postElement.innerHTML += `<img src="${post.image}" style="max-width: 100%;" />`;
-        }
+        postElement.innerHTML = `<strong>${post.username}</strong> <em>${new Date(post.timestamp).toLocaleString()}</em><br/>${post.text}`;
         postList.appendChild(postElement);
     });
 }
 
-loadPosts();
+loadPostList();
