@@ -1,0 +1,16 @@
+{
+  "name": "tth_messenger",
+  "version": "1.0.0",
+  "description": "Мессенджер на Node.js и MongoDB",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3",
+    "body-parser": "^1.19.0"
+  },
+  "author": "Ваше имя",
+  "license": "ISC"
+}
