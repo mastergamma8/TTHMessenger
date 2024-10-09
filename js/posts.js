@@ -1,11 +1,12 @@
-// Публикация поста
+let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
 document.getElementById('publish-button').addEventListener('click', function () {
-    const postText = document.getElementById('post-text').value;
+    const postText = document.getElementById('post-text').value.trim();
     const postImageUpload = document.getElementById('post-image-upload').files[0];
 
     if (postText || postImageUpload) {
         const post = {
-            username: currentUser.username,
+            username: document.getElementById('current-username').innerText,
             text: postText,
             image: '',
             timestamp: new Date().toLocaleString()
@@ -33,30 +34,18 @@ document.getElementById('publish-button').addEventListener('click', function () 
     }
 });
 
-// Загрузка постов
 function loadPosts() {
-    const feedContainer = document.getElementById('feed-container');
-    feedContainer.innerHTML = '';
-
+    const postList = document.getElementById('post-list');
+    postList.innerHTML = '';
     posts.forEach(post => {
         const postElement = document.createElement('div');
         postElement.classList.add('post');
-
-        const postHeader = document.createElement('div');
-        postHeader.innerHTML = `<strong>${post.username}</strong> <span>${post.timestamp}</span>`;
-        postElement.appendChild(postHeader);
-
-        const postText = document.createElement('p');
-        postText.innerText = post.text;
-        postElement.appendChild(postText);
-
+        postElement.innerHTML = `<strong>${post.username}</strong> <em>${post.timestamp}</em><br/>${post.text}`;
         if (post.image) {
-            const postImage = document.createElement('img');
-            postImage.src = post.image;
-            postImage.classList.add('post-image');
-            postElement.appendChild(postImage);
+            postElement.innerHTML += `<img src="${post.image}" style="max-width: 100%;" />`;
         }
-
-        feedContainer.appendChild(postElement);
+        postList.appendChild(postElement);
     });
 }
+
+loadPosts();
